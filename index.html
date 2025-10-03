@@ -1,59 +1,10 @@
 <!doctype html>
 <html lang="id">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Game Budaya Indonesia – Kerangka Admin + User</title>
-<style>
-  :root{ --bg1:#fff7ed; --bg2:#ffedd5; --text:#1f2937; --muted:#6b7280; --card:#ffffff; --ring:rgba(0,0,0,.08); --accent:#f97316; --dark:#111827; --good:#16a34a; --bad:#ef4444; }
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Inter,Arial,sans-serif;color:var(--text);background:linear-gradient(to bottom,var(--bg1),var(--bg2));}
-  .container{max-width:1200px;margin:0 auto;padding:20px}
-  h1{margin:0 0 6px;font-weight:900;letter-spacing:-.02em}
-  .muted{color:var(--muted)}
-  .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-  button,select,input,textarea{font:inherit}
-  button,select,input[type=file]{padding:.7rem 1rem;border-radius:14px;border:1.5px solid #e5e7eb;background:#fff;cursor:pointer}
-  button{font-weight:700}
-  .btn{border:1.5px solid #e5e7eb;background:#fff}
-  .btn-primary{background:var(--accent);color:#fff;border-color:transparent}
-  .btn-dark{background:var(--dark);color:#fff;border-color:transparent}
-  .btn-soft{background:#fff;border-color:#e5e7eb}
-  .badge{display:inline-block;padding:.3rem .6rem;border-radius:999px;background:#fff;border:1px solid #e5e7eb;font-size:12px}
-  .page{display:none}
-  .page.active{display:block}
-  .card{background:var(--card);border:1px solid #eee;border-radius:18px;box-shadow:0 6px 18px rgba(0,0,0,.06)}
-  .pad{padding:16px}
-  .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
-  @media (max-width:980px){.grid{grid-template-columns:1fr}}
-  .small{font-size:12px}
-
-  /* Quiz */
-  .q-card{background:#fff;border:1px solid #eee;border-radius:16px;padding:12px}
-  .option{display:block;margin:.5rem 0;padding:.8rem 1rem;border:2px solid #eee;border-radius:14px;font-weight:700;cursor:pointer;background:#fff}
-  .option:hover{border-color:#ddd}
-  .option.correct{border-color:var(--good);background:#ecfdf5}
-  .option.wrong{border-color:var(--bad);background:#fef2f2}
-
-  /* Puzzle */
-  .board-wrap{position:relative;border-radius:18px;overflow:hidden}
-  .board{position:relative;width:100%;aspect-ratio:1/1}
-  .tile{position:absolute;outline:none;border:none;padding:0;background:none}
-  .tile-face{position:absolute;inset:0}
-  .tile-face::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 2px var(--ring)}
-  .tile-num{position:absolute;right:8px;bottom:8px;font-size:14px;padding:3px 8px;border-radius:8px;background:rgba(255,255,255,.85);font-weight:800}
-  .overlay-win{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.92);backdrop-filter:saturate(140%) blur(2px)}
-  .orig img{width:100%;border-radius:14px;border:1px solid #eee;box-shadow:0 4px 12px rgba(0,0,0,.06);object-fit:cover}
-  .history{white-space:pre-wrap;line-height:1.55}
-
-  /* Admin */
-  .admin-grid{display:grid;grid-template-columns:300px 1fr;gap:16px}
-  @media (max-width:980px){.admin-grid{grid-template-columns:1fr}}
-  .input{display:block;width:100%;padding:.65rem .9rem;border-radius:12px;border:1.5px solid #e5e7eb;background:#fff}
-  .list-item{display:grid;grid-template-columns:72px 1fr auto;gap:10px;align-items:center;border-bottom:1px dashed #eee;padding:8px 0}
-  .thumb{width:72px;height:54px;object-fit:cover;border:1px solid #eee;border-radius:8px}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Game Budaya Indonesia – Kerangka Admin + User</title>
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 <div class="container">
@@ -183,7 +134,7 @@
             <div class="row" style="justify-content:space-between;align-items:flex-end">
               <div>
                 <h3 style="margin:0 0 6px">🏠 Kelola Rumah Adat</h3>
-                <div class="small muted">Buat entri rumah (nama, gambar puzzle, kredit, sejarah & ukuran). Pertanyaan kuis akan menunjuk ke salah satu rumah.</div>
+                <div class="small muted">Buat entri rumah (nama, path gambar, kredit, sejarah & ukuran). Pertanyaan kuis akan menunjuk ke salah satu rumah.</div>
               </div>
               <button id="house-new" class="btn-primary">＋ Tambah Rumah</button>
             </div>
@@ -207,10 +158,9 @@
                   </div>
                 </div>
                 <div style="width:280px">
-                  <div class="muted">Gambar Puzzle</div>
-                  <img id="h-preview" class="thumb" style="width:100%;height:180px" alt="pratinjau" />
-                  <input id="h-file" type="file" accept="image/*" style="margin-top:6px" />
-                  <div class="small muted">Gambar akan dikompresi otomatis (≈1200px).</div>
+                  <div class="muted">Path/Nama File Gambar</div>
+                  <input id="h-img-path" class="input" placeholder="mis. img/nama-gambar.jpg" />
+                  <div class="small muted">Pastikan gambar sudah diupload ke folder 'img'.</div>
                 </div>
               </div>
             </div>
@@ -278,130 +228,6 @@
   </section>
 </div>
 
-<script>
-/********************\n * DATA STORE (localStorage)\n ********************/
-const DB_KEY = 'budayaDB.v1';
-const defaultDB = { version: 1, houses: [], questions: [], settings: { adminCode: '1234', quizLength: 5 } };
-
-function loadDB(){ try{ return JSON.parse(localStorage.getItem(DB_KEY)) || { ...defaultDB }; }catch{ return { ...defaultDB }; } }
-function saveDB(db){ localStorage.setItem(DB_KEY, JSON.stringify(db)); }
-function setAdminCode(code){ const db=loadDB(); db.settings.adminCode=code; saveDB(db); }
-function setQuizLen(len){ const db=loadDB(); db.settings.quizLength = Number(len)||5; saveDB(db); }
-
-/********************\n * UTILITIES\n ********************/
-const $ = (id)=>document.getElementById(id);
-const pad = (n)=>String(n).padStart(2,'0');
-function randomId(prefix='id'){return prefix+'-'+Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
-function slugify(s){return (s||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'')}
-function shuffle(arr){ for(let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; }
-function dataURLFromImageFile(file, max=1200){ return new Promise((resolve,reject)=>{ const fr=new FileReader(); fr.onload=()=>{ const img=new Image(); img.onload=()=>{ const scale=Math.min(1, max/Math.max(img.width,img.height)); const w=Math.round(img.width*scale); const h=Math.round(img.height*scale); const c=document.createElement('canvas'); c.width=w; c.height=h; const ctx=c.getContext('2d'); ctx.drawImage(img,0,0,w,h); try{ resolve(c.toDataURL('image/jpeg',0.85)); }catch(e){ resolve(fr.result); } }; img.onerror=()=>reject(new Error('Gagal muat gambar')); img.src=fr.result; }; fr.onerror=()=>reject(new Error('Gagal baca file')); fr.readAsDataURL(file); }); }
-
-/********************\n * ROUTING SIMPLE\n ********************/
-function show(page){ ['page-landing','page-quiz','page-puzzle','page-admin'].forEach(id=>$(id).classList.remove('active')); $(page).classList.add('active'); }
-
-/********************\n * LANDING (USER)\n ********************/
-function refreshLanding(){ const db=loadDB(); const sel=$('sel-direct-house'); sel.innerHTML=''; if(!db.houses.length){ const opt=document.createElement('option'); opt.textContent='(Belum ada)'; sel.appendChild(opt); return; } db.houses.forEach(h=>{ const opt=document.createElement('option'); opt.value=h.id; opt.textContent=h.name; sel.appendChild(opt); }); }
-
-$('btn-home').addEventListener('click', ()=>show('page-landing'));
-$('btn-admin').addEventListener('click', ()=>show('page-admin'));
-$('btn-start-direct').addEventListener('click', ()=>{ const id=$('sel-direct-house').value; if(!id){ alert('Belum ada rumah. Tambahkan di Admin.'); return; } startPuzzle(id); });
-$('btn-start-quiz').addEventListener('click', ()=>{ const db=loadDB(); const len = Number($('quiz-length').value || db.settings.quizLength || 5); startQuiz(len); });
-
-/********************\n * QUIZ ENGINE (USER)\n ********************/
-let quizIndices = [];
-let quizIdx = 0;
-function startQuiz(length=5){ const db=loadDB(); if(!db.questions.length){ alert('Belum ada pertanyaan. Tambahkan di Admin.'); show('page-admin'); return; } const all=Array.from(db.questions.keys()); shuffle(all); quizIndices = all.slice(0, Math.min(length, db.questions.length)); quizIdx=0; $('quiz-progress').textContent = `(0/${quizIndices.length})`; renderQuestion(); show('page-quiz'); }
-
-$('btn-exit-quiz').addEventListener('click', ()=>show('page-landing'));
-$('btn-back-quiz').addEventListener('click', ()=>show('page-quiz'));
-$('btn-next-question').addEventListener('click', ()=>{ nextQuestion(); });
-
-function renderQuestion(){ const db=loadDB(); const qIdx = quizIndices[quizIdx]; const q = db.questions[qIdx]; const box=$('quiz-box'); if(!q){ finishQuiz(); return; } $('quiz-progress').textContent = `(${quizIdx+1}/${quizIndices.length})`; box.innerHTML=''; const elQ=document.createElement('div'); elQ.style.fontSize='18px'; elQ.style.marginBottom='8px'; elQ.innerHTML = `<strong>Pertanyaan:</strong> ${q.text}`; box.appendChild(elQ); (q.options||[]).forEach((opt,i)=>{ const btn=document.createElement('button'); btn.className='option'; btn.textContent=String.fromCharCode(65+i)+'. '+opt; btn.addEventListener('click',()=>{ const correct = i === (q.answerIndex||0); if (correct){ // lanjut ke puzzle terkait
-  startPuzzle(q.houseId); } else { btn.classList.add('wrong'); setTimeout(()=>btn.classList.remove('wrong'), 600); } }); box.appendChild(btn); }); }
-
-function nextQuestion(){ if (quizIdx+1 >= quizIndices.length){ finishQuiz(); } else { quizIdx++; renderQuestion(); show('page-quiz'); } }
-function finishQuiz(){ const box=$('quiz-box'); box.innerHTML = '<h3>Selesai! 👏</h3><p>Kamu sudah menyelesaikan sesi kuis. Silakan kembali ke Beranda atau mulai lagi.</p>'; }
-
-/********************\n * PUZZLE ENGINE (USER)\n ********************/
-let size=3, order=[], moves=0, running=false, won=false, timerId=null, ms=0, currentHouse=null, imgUrl='';
-
-function fmt(ms){ const s=Math.floor(ms/1000); return `${pad(Math.floor(s/60))}:${pad(s%60)}.${pad(Math.floor((ms%1000)/10))}`; }
-function startTimer(){ stopTimer(); timerId=setInterval(()=>{ ms+=100; $('time').textContent=fmt(ms); },100); }
-function stopTimer(){ if(timerId){ clearInterval(timerId); timerId=null; } }
-
-function shuffledSolvableOrder(n){ const t=n*n; const arr=Array.from({length:t},(_,i)=>i); for(let i=t-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } if(!isSolvable(arr,n)){ const i1=arr.findIndex(x=>x!==t-1); const i2=arr.findIndex((x,idx)=>x!==t-1 && idx!==i1); [arr[i1],arr[i2]]=[arr[i2],arr[i1]]; } return arr; }
-function isSolvable(order,n){ const t=n*n; const bi=order.indexOf(t-1); const arr=order.filter(x=>x!==t-1); let inv=0; for(let i=0;i<arr.length;i++){ for(let j=i+1;j<arr.length;j++){ if(arr[i]>arr[j]) inv++; } } if(n%2===1) return inv%2===0; const rowTop=Math.floor(bi/n); const rowBottom=n-rowTop; return (rowBottom%2===0)?(inv%2===1):(inv%2===0); }
-
-function renderBoard(){ const total=size*size, blank=total-1; const board=$('board'); board.innerHTML=''; const tilePct=100/size; order.forEach((tile,idx)=>{ const r=Math.floor(idx/size), c=idx%size; const tr=Math.floor(tile/size), tc=tile%size; const isBlank = tile===blank; const btn=document.createElement('button'); btn.className='tile'; btn.style.left=(c*tilePct)+'%'; btn.style.top=(r*tilePct)+'%'; btn.style.width=tilePct+'%'; btn.style.height=tilePct+'%'; btn.style.transition='left 120ms ease, top 120ms ease'; btn.style.cursor=isBlank?'default':'pointer'; if(!isBlank){ const face=document.createElement('div'); face.className='tile-face'; face.style.backgroundImage=`url(${imgUrl})`; face.style.backgroundSize=(size*100)+'% '+(size*100)+'%'; face.style.backgroundPosition=(tc*(100/(size-1)))+'% '+(tr*(100/(size-1)))+'%'; const num=document.createElement('div'); num.className='tile-num'; num.textContent=String(tile+1); face.appendChild(num); btn.appendChild(face); } btn.addEventListener('click',()=>tryMove(idx)); board.appendChild(btn); }); $('hint').src = imgUrl; updateBestUI(); }
-
-function tryMove(idx){ if(won) return; const r=Math.floor(idx/size), c=idx%size; const total=size*size, blank=total-1; const bi=order.indexOf(blank), br=Math.floor(bi/size), bc=bi%size; const adj=(Math.abs(r-br)+Math.abs(c-bc))===1; if(adj){ [order[idx],order[bi]]=[order[bi],order[idx]]; moves++; $('moves').textContent=String(moves); if(!running){ running=true; startTimer(); } renderBoard(); checkWin(); } }
-
-function checkWin(){ const ok=order.every((v,i)=>v===i); if(!ok) return; won=true; running=false; stopTimer(); const key=`best-${size}-${currentHouse}`; const prev=localStorage.getItem(key); if(!prev || Number(prev)>ms){ localStorage.setItem(key,String(ms)); } $('win-stats').textContent = `Langkah: ${moves} • Waktu: ${fmt(ms)}`; const db=loadDB(); const h = db.houses.find(x=>x.id===currentHouse); $('history').textContent = h?.history || ''; $('win').style.display='flex'; updateBestUI(); }
-
-function updateBestUI(){ const key=`best-${size}-${currentHouse}`; const v=localStorage.getItem(key); $('best').textContent = v? fmt(Number(v)) : '–'; $('best-label').textContent = `${size}×${size}`; }
-
-function startShuffle(){ order=shuffledSolvableOrder(size); moves=0; $('moves').textContent='0'; won=false; running=true; ms=0; $('time').textContent=fmt(ms); $('win').style.display='none'; startTimer(); renderBoard(); }
-function resetSolved(){ order=Array.from({length:size*size},(_,i)=>i); moves=0; $('moves').textContent='0'; won=false; running=false; ms=0; $('time').textContent=fmt(ms); $('win').style.display='none'; stopTimer(); renderBoard(); }
-
-$('btn-shuffle').addEventListener('click', startShuffle);
-$('btn-reset').addEventListener('click', resetSolved);
-$('btn-hint').addEventListener('click', ()=>{ const on=$('hint').style.display!=='none'; $('hint').style.display = on? 'none':'block'; $('btn-hint').textContent = on? '👀 Hint':'🙈 Sembunyikan'; });
-$('btn-again').addEventListener('click', startShuffle);
-
-function startPuzzle(houseId){ const db=loadDB(); const h=db.houses.find(x=>x.id===houseId); if(!h){ alert('Data rumah tidak ditemukan.'); return; } currentHouse = houseId; size = Number(h.size)||3; imgUrl = h.img; $('puzzle-title').textContent = `🧩 Puzzle: ${h.name}`; const img=$('original'); img.onerror=()=>{ img.removeAttribute('src'); img.alt='Gambar gagal dimuat'; }; img.src = imgUrl; $('credit').textContent = h.credit||''; resetSolved(); show('page-puzzle'); }
-
-/********************\n * ADMIN\n ********************/
-const ADMIN_SESSION_KEY = 'adminSession.v1';
-function isAdmin(){ return sessionStorage.getItem(ADMIN_SESSION_KEY)==='1'; }
-function requireAdmin(){ if(!isAdmin()){ show('page-admin'); $('admin-panel').style.display='none'; $('admin-login').style.display='block'; } else { $('admin-panel').style.display='block'; $('admin-login').style.display='none'; } }
-
-$('db-version').textContent = String(loadDB().version||1);
-$('admin-login-btn').addEventListener('click', ()=>{ const code=$('admin-pass').value||''; const db=loadDB(); if(code===db.settings.adminCode){ sessionStorage.setItem(ADMIN_SESSION_KEY,'1'); requireAdmin(); initAdminTabs(); } else { alert('Kode admin salah'); } });
-
-// tabs
-$('tab-houses').addEventListener('click', ()=>showTab('houses'));
-$('tab-questions').addEventListener('click', ()=>showTab('questions'));
-$('tab-settings').addEventListener('click', ()=>showTab('settings'));
-
-function showTab(name){ ['houses','questions','settings'].forEach(n=>{ $('tabc-'+n).style.display = (n===name)?'block':'none'; }); }
-
-// Export/Import
-$('btn-export').addEventListener('click', ()=>{ const db=loadDB(); const blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='game-budaya-db.json'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url); });
-$('file-import').addEventListener('change', ()=>{ const f=$('file-import').files?.[0]; if(!f) return; const fr=new FileReader(); fr.onload=()=>{ try{ const dat=JSON.parse(fr.result); if(!dat || !('houses' in dat) || !('questions' in dat)) throw new Error('Format tidak sesuai'); saveDB(dat); alert('Impor sukses'); initAll(); }catch(e){ alert('Gagal impor: '+e.message); } }; fr.readAsText(f); });
-
-// Houses CRUD
-$('house-new').addEventListener('click', ()=>{ $('house-form').style.display='block'; $('h-id').value=''; $('h-name').value=''; $('h-credit').value=''; $('h-history').value=''; $('h-size').value='3'; $('h-preview').removeAttribute('src'); $('h-file').value=''; });
-$('h-cancel').addEventListener('click', ()=>{ $('house-form').style.display='none'; });
-$('h-file').addEventListener('change', ()=>{ const f=$('h-file').files?.[0]; if(!f){ $('h-preview').removeAttribute('src'); return; } dataURLFromImageFile(f, 1200).then(url=>{ $('h-preview').src=url; }); });
-$('h-save').addEventListener('click', ()=>{ const db=loadDB(); const id=$('h-id').value||randomId('house'); const name=$('h-name').value.trim(); if(!name) return alert('Nama wajib diisi'); const credit=$('h-credit').value.trim(); const history=$('h-history').value.trim(); const size=Number($('h-size').value||3); let img=$('h-preview').getAttribute('src'); if(!img){ return alert('Upload gambar terlebih dahulu'); }
-  const exists = db.houses.find(x=>x.id===id);
-  const obj={ id, name, credit, history, size, img };
-  if(exists){ Object.assign(exists, obj); } else { db.houses.push(obj); }
-  saveDB(db); $('house-form').style.display='none'; renderHousesList(); refreshLanding(); refreshQuestionTargets(); alert('Rumah disimpan'); });
-
-function renderHousesList(){ const db=loadDB(); const el=$('houses-list'); if(!db.houses.length){ el.innerHTML='<div class="small muted">Belum ada rumah.</div>'; return; } el.innerHTML=''; db.houses.forEach(h=>{ const row=document.createElement('div'); row.className='list-item'; const img=document.createElement('img'); img.className='thumb'; img.src=h.img; const meta=document.createElement('div'); meta.innerHTML=`<div><strong>${h.name}</strong></div><div class="small muted">Ukuran: ${h.size||3}×${h.size||3} • ${h.credit||''}</div>`; const act=document.createElement('div'); const edit=document.createElement('button'); edit.className='btn'; edit.textContent='✏️ Edit'; edit.addEventListener('click',()=>{ $('house-form').style.display='block'; $('h-id').value=h.id; $('h-name').value=h.name; $('h-credit').value=h.credit||''; $('h-history').value=h.history||''; $('h-size').value=String(h.size||3); $('h-preview').src=h.img; $('h-file').value=''; }); const del=document.createElement('button'); del.className='btn'; del.style.marginLeft='6px'; del.textContent='🗑️ Hapus'; del.addEventListener('click',()=>{ if(!confirm('Hapus rumah ini?')) return; const db2=loadDB(); db2.houses = db2.houses.filter(x=>x.id!==h.id); // juga hapus pertanyaan yang menarget h.id ? opsional
-  saveDB(db2); renderHousesList(); refreshLanding(); refreshQuestionTargets(); }); const play=document.createElement('button'); play.className='btn-dark'; play.style.marginLeft='6px'; play.textContent='🧩 Mainkan'; play.addEventListener('click',()=>startPuzzle(h.id)); act.appendChild(play); act.appendChild(edit); act.appendChild(del); row.appendChild(img); row.appendChild(meta); row.appendChild(act); el.appendChild(row); }); }
-
-// Questions CRUD
-function refreshQuestionTargets(){ const db=loadDB(); const sel=$('q-target'); if(!sel) return; sel.innerHTML=''; db.houses.forEach(h=>{ const opt=document.createElement('option'); opt.value=h.id; opt.textContent=h.name; sel.appendChild(opt); }); }
-$('q-new').addEventListener('click', ()=>{ $('q-form').style.display='block'; $('q-id').value=''; $('q-text').value=''; $('q-a').value=''; $('q-b').value=''; $('q-c').value=''; $('q-d').value=''; $('q-answer').value='0'; refreshQuestionTargets(); });
-$('q-cancel').addEventListener('click', ()=>{ $('q-form').style.display='none'; });
-$('q-save').addEventListener('click', ()=>{ const db=loadDB(); const id=$('q-id').value||randomId('q'); const text=$('q-text').value.trim(); if(!text) return alert('Pertanyaan wajib diisi'); const options=[$('q-a').value.trim(),$('q-b').value.trim(),$('q-c').value.trim(),$('q-d').value.trim()]; if(options.some(o=>!o)) return alert('Semua opsi (A–D) wajib diisi'); const answerIndex=Number($('q-answer').value||0); const houseId=$('q-target').value; if(!houseId) return alert('Pilih target rumah'); const exists=db.questions.find(x=>x.id===id); const obj={ id, text, options, answerIndex, houseId };
-  if(exists){ Object.assign(exists,obj); } else { db.questions.push(obj); }
-  saveDB(db); $('q-form').style.display='none'; renderQuestionsList(); alert('Pertanyaan disimpan'); });
-
-function renderQuestionsList(){ const db=loadDB(); const el=$('questions-list'); if(!db.questions.length){ el.innerHTML='<div class="small muted">Belum ada pertanyaan.</div>'; return; } el.innerHTML=''; db.questions.forEach(q=>{ const row=document.createElement('div'); row.className='list-item'; const thumb=document.createElement('div'); thumb.className='thumb'; thumb.style.display='flex'; thumb.style.alignItems='center'; thumb.style.justifyContent='center'; thumb.style.fontSize='20px'; thumb.textContent='❓'; const meta=document.createElement('div'); const h = db.houses.find(x=>x.id===q.houseId); const ans = String.fromCharCode(65+(q.answerIndex||0)); meta.innerHTML=`<div><strong>${q.text}</strong></div><div class="small muted">Benar: ${ans} • Target: ${h? h.name : '(hapus)'} </div>`; const act=document.createElement('div'); const edit=document.createElement('button'); edit.className='btn'; edit.textContent='✏️ Edit'; edit.addEventListener('click',()=>{ $('q-form').style.display='block'; $('q-id').value=q.id; $('q-text').value=q.text; $('q-a').value=q.options[0]||''; $('q-b').value=q.options[1]||''; $('q-c').value=q.options[2]||''; $('q-d').value=q.options[3]||''; $('q-answer').value=String(q.answerIndex||0); refreshQuestionTargets(); $('q-target').value = q.houseId||''; }); const del=document.createElement('button'); del.className='btn'; del.style.marginLeft='6px'; del.textContent='🗑️ Hapus'; del.addEventListener('click',()=>{ if(!confirm('Hapus pertanyaan ini?')) return; const db2=loadDB(); db2.questions = db2.questions.filter(x=>x.id!==q.id); saveDB(db2); renderQuestionsList(); }); act.appendChild(edit); act.appendChild(del); row.appendChild(thumb); row.appendChild(meta); row.appendChild(act); el.appendChild(row); }); }
-
-// Settings
-$('set-save').addEventListener('click', ()=>{ const code=$('set-admin').value||'1234'; setAdminCode(code); alert('Kode admin disimpan'); });
-$('set-apply').addEventListener('click', ()=>{ const len=$('set-quizlen').value||5; setQuizLen(len); alert('Jumlah soal default disimpan'); });
-$('set-reset').addEventListener('click', ()=>{ if(!confirm('Reset SEMUA data?')) return; saveDB({ ...defaultDB }); alert('Data dikosongkan.'); initAll(); show('page-admin'); });
-
-/********************\n * INIT\n ********************/
-function initAdminTabs(){ renderHousesList(); renderQuestionsList(); refreshQuestionTargets(); showTab('houses'); }
-function initAll(){ refreshLanding(); $('db-version').textContent=String(loadDB().version||1); if(isAdmin()){ $('admin-panel').style.display='block'; $('admin-login').style.display='none'; initAdminTabs(); } else { $('admin-panel').style.display='none'; $('admin-login').style.display='block'; } }
-
-initAll();
-</script>
+<script src="js/script.js"></script>
 </body>
 </html>
