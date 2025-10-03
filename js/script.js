@@ -28,7 +28,7 @@ const staticDB = {
     { id: 'q-8', text: 'Uma Mbatangu adalah rumah adat yang berasal dari pulau...?', options: ['Sumba', 'Flores', 'Bali', 'Lombok'], answerIndex: 0, houseId: 'house-8' },
     { id: 'q-9', text: 'Baileo di Maluku berfungsi utama sebagai...?', options: ['Balai pertemuan dan pusat adat', 'Rumah tinggal kepala suku', 'Tempat penyimpanan hasil bumi', 'Peninggalan kerajaan'], answerIndex: 0, houseId: 'house-9' },
     { id: 'q-10', text: 'Rumah adat Honai yang berbentuk bundar dirancang untuk menghadapi iklim...?', options: ['Dingin di pegunungan', 'Panas di pantai', 'Basah di hutan', 'Kering di gurun'], answerIndex: 0, houseId: 'house-10' },
-    { id: 'q-11', text: 'Rumah adat dengan atap berbentuk limas atau piramida yang merupakan ikon dari Sumatera Selatan adalah...?', options: ['Rumah Limas', 'Rumah Gadang', 'Rumah Bolon', 'Rumah Kebaya'], answerIndex: 0, houseId: 'house-11' },
+    { id: 'q-11', text: 'Rumah adat dengan atap berbentuk piramida yang merupakan ikon dari Sumatera Selatan adalah...?', options: ['Rumah Limas', 'Rumah Gadang', 'Rumah Bolon', 'Rumah Kebaya'], answerIndex: 0, houseId: 'house-11' },
     { id: 'q-12', text: 'Rumah Lopo adalah rumah adat yang berasal dari...?', options: ['Pulau Alor', 'Pulau Timor', 'Pulau Sulawesi', 'Pulau Kalimantan'], answerIndex: 0, houseId: 'house-12' }
   ],
   settings: { adminCode: '1234', quizLength: 5 }
@@ -150,4 +150,5 @@ function renderQuestionsList(){ const db=loadDB(); const el=$('questions-list');
  ********************/
 function initAdminTabs(){ renderHousesList(); renderQuestionsList(); refreshQuestionTargets(); showTab('houses'); }
 function initAll(){ refreshLanding(); $('db-version').textContent=String(loadDB().version||1); if(isAdmin()){ $('admin-panel').style.display='block'; $('admin-login').style.display='none'; initAdminTabs(); } else { $('admin-panel').style.display='none'; $('admin-login').style.display='block'; } }
+
 initAll();
